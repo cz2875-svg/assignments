@@ -51,7 +51,7 @@ def weights_init_normal(m):
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 z_dim = 100
 batch_size = 128
-epochs = 30
+epochs = 20
 lr = 2e-4
 beta1 = 0.5
 
@@ -121,9 +121,10 @@ for epoch in range(1, epochs + 1):
         fake_samples = G(fixed_noise)
         fake_samples = (fake_samples + 1) / 2.0  
         grid = make_grid(fake_samples, nrow=8)
-        save_image(grid, f"gan_images/epoch_{epoch:03d}.png")
+        save_image(grid, f"gan_images/epoch_{epoch:02d}.png")
 
 print("Training complete! Check the gan_images/ folder for results.")
 
-from IPython.display import Image, display
-display(Image(filename="gan_images/epoch_010.png"))
+from PIL import Image
+img = Image.open("gan_images/epoch_20.png")
+img.show()
